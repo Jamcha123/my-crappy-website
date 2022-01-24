@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet">
+    <script type="module" src="index.js"></script>
+    <style>
+        ::-webkit-scrollbar{
+            width: 0.5rem;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: red;
+        }
+        .container{
+            width: 100%;
+            height:40em;
+            margin: auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .module{
+            width: 100%;
+            height: 40em;
+            margin: auto;
+            padding: 0;
+        }
+        .box{
+            width: 100%;
+            margin: auto;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        button{
+            width: 5em;
+            height: 5em;
+            margin: auto;
+            padding: 0;
+            transition: background-color 2s;
+        }
+        button:hover{
+            background-color: seagreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="module" id="module">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.pA-t_w7J2tyT4XCBkR-Z1wHaE8&pid=Api" alt="" width="100%" height="100%" id="you" class="you">
+        </div>
+        <div class="module" id="module">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.UVtY73-LIYcHMtUfFBeIVQHaEK&pid=Api" alt="" width="100%" height="100%" id="you" class="you">
+        </div>
+        <div class="module" id="module">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.w1TWOOwP8iSdVdnbc1rstgHaEK&pid=Api" alt="" width="100%" height="100%" id="you" class="you">
+        </div>
+        <div class="module" id="module">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.64Nah6TbFklrZ1U9xlJsDQHaD8&pid=Api" alt="" width="100%" height="100%" id="you" class="you">
+        </div>
+        <div class="box">
+            <button class="left" onclick="press(-1)">&#10094</button>
+            <button class="right" onclick="press(+1)">&#10095</button>
+        </div>
+    </div>
+    <script>
+        var slideindex = 1;
+        showDivs();
+        function press(n){
+            showDivs(slideindex += n);
+        }
+        function showDivs(n){
+            var i;
+            var x = document.getElementsByClassName("you");
+            if(n > x.length) {slideindex = 1}
+            if(n < 1) {slideindex = x.length}
+            for(i = 0; i < x.length; i++){
+                x[i].style.display = "none";
+            }
+            x[slideindex-1].style.display = "block";
+        }
+        const el = document.querySelector("#you");
+
+        document.addEventListener("mouseover", (e) => {
+            el.style.position.top = e.offsetY + "%";
+            el.style.position.bottom = e.offsetY + "%";
+            el.style.position.right = e.offsetX + "%";
+            el.style.position.left = e.offsetX + "%";
+        })
+    </script>
+</body>
+</html>
