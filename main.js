@@ -12,7 +12,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 renderer.render(scene, camera);
 
-const loader = new THREE.TextureLoader().load('th (2).jpg');
+const loader = new THREE.TextureLoader().load('https://tse3.mm.bing.net/th?id=OIP.X3CcpmzjHXgqvgJe4gU10wHaE4&pid=Api');
 const geomtry = new THREE.TorusGeometry(100, 200, 300);
 
 const torusmaterial = new THREE.MeshStandardMaterial({map: loader});
