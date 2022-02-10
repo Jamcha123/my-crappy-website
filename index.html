@@ -5,10 +5,108 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-    <script type="module" src="./index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet">
+    <script type="module" src="./index.js"></script>
+    <style>
+      html{
+        scroll-behavior: smooth;
+        overflow: hidden;
+      }
+      header{
+        width: 100%;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        position:fixed;
+        z-index: 100;
+        background-color: aquamarine;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .navar1{
+        width: 25%;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        position: relative;
+      }
+      .navar1 .ar1{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        list-style-type: none;
+        perspective: 1000px;
+      }
+      .navar2{
+        width: 75%;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        position: relative;
+      }
+      .navar2 .ar2{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        list-style-type: none;
+        perspective: 1000px;
+      }
+      .drop{
+        display:inline-block;
+        position: relative;
+      }
+      .boxes{
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        padding: 1em;
+        transition: background-color 2s;
+      }
+      .boxes:hover{
+        background-color: rgb(88, 31, 221);
+      }
+      .pop{
+        display: none;
+        z-index: 1;
+      }
+    </style>
   </head>
   <body>
+    <canvas id="bg">
+      <header>
+        <nav class="navar1">
+          <ul class="ar1">
+            <li class="drop">
+              <div class="boxes">
+                <span style="font-size: larger;font-weight: bolder;font-family: 'Roboto',sans-serif;color: indigo;">More links</span>
+              </div>
+              <ul class="pop">
+                <li><a href="">My Stackoverflow</a></li>
+                <li><a href="">My Github</a></li>
+                <li><a href="">My Linkedin</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <nav class="navar2">
+          <ul class="ar2">
+            <div class="boxes">
+              <li><a href="">About me</a></li>
+            </div>
+            <div class="boxes">
+              <li><a href="">Main content</a></li>
+            </div>
+            <div class="boxes">
+              <li><a href="">Contact info</a></li>
+            </div>
+          </ul>
+        </nav>
+      </header>
+    </canvas>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { PointsMaterial } from 'three';
 import './style.css';
 
 const scene = new THREE.Scene();
@@ -7,25 +8,30 @@ const camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.inner
 camera.rotation.z = 1;
 camera.rotation.x = Math.PI / 2;
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector('#bg'),
+});
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+camera.position.set(5, 5, 5);
 renderer.render(scene, camera);
 
-const loader = new THREE.TextureLoader().load('https://tse3.mm.bing.net/th?id=OIP.X3CcpmzjHXgqvgJe4gU10wHaE4&pid=Api');
-const geomtry = new THREE.TorusGeometry(100, 200, 300);
+var x = document.querySelector('header');
+document.body.appendChild(x);
 
-const torusmaterial = new THREE.MeshStandardMaterial({map: loader});
+const lights = new THREE.DirectionalLight(0xffffff);
+lights.position.set(0, 1, 0);
+lights.castShadow = true;
 
-const torus = new THREE.Mesh(geomtry, torusmaterial);
-
-scene.add(torus);
-
-const lights = new THREE.AmbientLight({color: 0xFFFFFF32});
-
-scene.add(lights);
+lights.shadow.mapSize.width = 512;
+lights.shadow.mapSize.height = 512;
+lights.shadow.camera.near = 0.1;
+lights.shadow.camera.far = 100;
 
 const vertices = [];
+
 for(let i = 0; i < 10000; i++){
   const x = THREE.MathUtils.randFloatSpread(2000);
   const y = THREE.MathUtils.randFloatSpread(2000);
@@ -33,25 +39,22 @@ for(let i = 0; i < 10000; i++){
 
   vertices.push(x, y, z);
 }
-const pointgeo = new THREE.BufferGeometry();
-pointgeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-const pointmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 2});
+const geomtry = new THREE.BufferGeometry();
+geomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-const points = new THREE.Points(pointgeo, pointmaterial);
+const material = new PointsMaterial({color: 0xFFFFFF32});
 
-scene.add(points);
+const point = new THREE.Points(geomtry, material);
+point.castShadow = true;
+point.receiveShadow = false;
+scene.add(point);
 
-function animate(){
-  requestAnimationFrame(animate);
+renderer.render(scene, camera);
 
-  torus.rotation.x += 0.01;
-  torus.rotation.y += 0.02;
-  torus.rotation.z += 0.01;
-
-  points.position.x = Math.random() * 600 - 300;
-  points.position.y = Math.random() * 600 - 300;
-  points.position.z = Math.random() * 600 - 300;
+window.addEventListener('mousemove', (e) => {
+  point.position.x = Math.random() * 600 - 300;
+  point.position.y = Math.random() * 600 - 300;
+  point.position.z = Math.random() * 600 - 300;
 
   renderer.render(scene, camera);
-}
-animate();
+});
