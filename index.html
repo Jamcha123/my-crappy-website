@@ -17,9 +17,9 @@
         height: fit-content;
         margin: auto;
         padding: 0;
-        position:fixed;
+        position:relative;
         z-index: 100;
-        background-color: aquamarine;
+        background-color: transparent;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -38,7 +38,6 @@
         align-items: center;
         justify-content: space-evenly;
         list-style-type: none;
-        perspective: 1000px;
       }
       .navar2{
         width: 75%;
@@ -53,11 +52,11 @@
         align-items: center;
         justify-content: space-evenly;
         list-style-type: none;
-        perspective: 1000px;
       }
       .drop{
         display:inline-block;
         position: relative;
+        transition: opacity 2s;
       }
       .boxes{
         width: fit-content;
@@ -70,8 +69,30 @@
         background-color: rgb(88, 31, 221);
       }
       .pop{
-        display: none;
+        opacity: 0;
         z-index: 1;
+        position: fixed;
+        min-width: fit-content;
+        min-height: fit-content;
+        margin: auto;
+        padding: 0;
+        list-style-type: none;
+        box-shadow: 10px 10px 10px 10px;
+        background-color: transparent;
+      }
+      .drop:hover .pop{
+        opacity: 1;
+      }
+      li a{
+        text-decoration: none;
+        color: lime;
+        font-size: larger;
+        font-weight: bolder;
+        font-family: 'Roboto',sans-serif;
+        transition: color 2s;
+      }
+      li a:hover{
+        color: cornflowerblue;
       }
     </style>
   </head>
@@ -82,7 +103,7 @@
           <ul class="ar1">
             <li class="drop">
               <div class="boxes">
-                <span style="font-size: larger;font-weight: bolder;font-family: 'Roboto',sans-serif;color: indigo;">More links</span>
+                <span style="font-size: larger;font-weight: bolder;font-family: 'Roboto',sans-serif;color: lime;opacity: 1;">More links</span>
               </div>
               <ul class="pop">
                 <li><a href="">My Stackoverflow</a></li>

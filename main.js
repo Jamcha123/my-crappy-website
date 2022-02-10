@@ -58,3 +58,22 @@ window.addEventListener('mousemove', (e) => {
 
   renderer.render(scene, camera);
 });
+const spheregeomtry = new THREE.SphereGeometry(200, 300, 400);
+const loader = new THREE.TextureLoader().load('https://tse3.mm.bing.net/th?id=OIP.LhXpzQ_6j29qGmfVUIawPAHaHZ&pid=Api');
+const spherematerial = new THREE.MeshBasicMaterial({map: loader});
+const sphere = new THREE.Mesh(spheregeomtry, spherematerial);
+sphere.castShadow = true;
+sphere.receiveShadow = false;
+scene.add(sphere);
+
+function animate(){
+  requestAnimationFrame(animate);
+
+  sphere.rotation.x += 0.01;
+  sphere.rotation.y += 0.02;
+  sphere.rotation.z += 0.01;
+
+  renderer.render(scene, camera);
+}
+animate();
+
