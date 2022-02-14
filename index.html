@@ -9,44 +9,27 @@
     <script type="module" src="./index.js"></script>
     <style>
       html{
-        scroll-behavior: smooth;
         overflow: hidden;
+        scroll-behavior: smooth;
       }
       header{
         width: 100%;
         height: fit-content;
         margin: auto;
         padding: 0;
-        position:relative;
-        z-index: 100;
-        background-color: transparent;
+        position:fixed;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
       }
-      .navar1{
+      .navbar1{
         width: 25%;
         height: fit-content;
         margin: auto;
         padding: 0;
         position: relative;
       }
-      .navar1 .ar1{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-        list-style-type: none;
-      }
-      .navar2{
-        width: 75%;
-        height: fit-content;
-        margin: auto;
-        padding: 0;
-        position: relative;
-      }
-      .navar2 .ar2{
+      .navbar1 .bar1{
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -54,75 +37,142 @@
         list-style-type: none;
       }
       .drop{
-        display:inline-block;
+        display: inline-block;
         position: relative;
-        transition: opacity 2s;
       }
       .boxes{
         width: fit-content;
         height: fit-content;
         margin: auto;
         padding: 1em;
-        transition: background-color 2s;
-      }
-      .boxes:hover{
-        background-color: rgb(88, 31, 221);
       }
       .pop{
-        opacity: 0;
+        display: block;
         z-index: 1;
         position: fixed;
+        opacity: 0;
+        transition: opacity 2s;
         min-width: fit-content;
         min-height: fit-content;
         margin: auto;
         padding: 0;
         list-style-type: none;
         box-shadow: 10px 10px 10px 10px;
-        background-color: transparent;
+        background-color: orangered;
+        align-items: center;
+        justify-content: center;
       }
       .drop:hover .pop{
         opacity: 1;
       }
-      li a{
-        text-decoration: none;
-        color: lime;
-        font-size: larger;
-        font-weight: bolder;
-        font-family: 'Roboto',sans-serif;
-        transition: color 2s;
+      .navbar2{
+        width: 75%;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        position: relative;
       }
-      li a:hover{
-        color: cornflowerblue;
+      .navbar2 .bar2{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        list-style-type: none;
+      }
+      .boxes1{
+        width: 150px;
+        height: 50px;
+        background-color: transparent;
+        perspective: 1000px;
+      }
+      .innerbox{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 2s;
+        text-align: center;
+      }
+      .boxes1:hover .innerbox{
+        transform: rotateY(180deg);
+      }
+      .front, .back{
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      .front{
+        background-color:rgb(255, 1, 255);
+      }
+      .back{
+        background-color: rgb(47, 0, 255);
+        transform: rotateY(180deg);
+      }
+      li a{
+        color: rgb(1, 7, 1);
+        font-size: larger;
+        font-family: 'Roboto',sans-serif;
+        font-weight: bolder;
+        text-decoration: none;
       }
     </style>
   </head>
   <body>
     <canvas id="bg">
       <header>
-        <nav class="navar1">
-          <ul class="ar1">
+        <nav class="navbar1">
+          <ul class="bar1">
             <li class="drop">
               <div class="boxes">
-                <span style="font-size: larger;font-weight: bolder;font-family: 'Roboto',sans-serif;color: lime;opacity: 1;">More links</span>
+                <span style="font-size: larger;font-weight: bolder;font-family: 'Roboto',sans-serif;color: lime;">More links</span>
               </div>
               <ul class="pop">
-                <li><a href="">My Stackoverflow</a></li>
-                <li><a href="">My Github</a></li>
-                <li><a href="">My Linkedin</a></li>
+                <div class="boxes">
+                  <li><a href="">My Stackoverflow</a></li>
+                </div>
+                <div class="boxes">
+                  <li><a href="">My Github</a></li>
+                </div>
+                <div class="boxes">
+                  <li><a href="">My Linkedin</a></li>
+                </div>
               </ul>
             </li>
           </ul>
         </nav>
-        <nav class="navar2">
-          <ul class="ar2">
-            <div class="boxes">
-              <li><a href="">About me</a></li>
+        <nav class="navbar2">
+          <ul class="bar2">
+            <div class="boxes1">
+              <div class="innerbox">
+                <div class="front">
+                  <li><a href="">About me</a></li>
+                </div>
+                <div class="back">
+                  <li><a href="">About me</a></li>
+                </div>
+              </div>
             </div>
-            <div class="boxes">
-              <li><a href="">Main content</a></li>
+            <div class="boxes1">
+              <div class="innerbox">
+                <div class="front">
+                  <li><a href="">Main content</a></li>
+                </div>
+                <div class="back">
+                  <li><a href="">Main content</a></li>
+                </div>
+              </div>
             </div>
-            <div class="boxes">
-              <li><a href="">Contact info</a></li>
+            <div class="boxes1">
+              <div class="innerbox">
+                <div class="front">
+                  <li><a href="">Contact info</a></li>
+                </div>
+                <div class="back">
+                  <li><a href="">Contact info</a></li>
+                </div>
+              </div>
             </div>
           </ul>
         </nav>
