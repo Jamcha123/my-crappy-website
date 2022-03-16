@@ -7,14 +7,13 @@ const camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.inner
 camera.rotation.z = 1;
 camera.rotation.x = Math.PI / 2;
 
-const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#bg'),
-});
+const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
+document.body.appendChild(renderer.domElement);
 camera.position.setZ(30);
 renderer.render(scene, camera);
 
@@ -40,9 +39,19 @@ for(let i = 0; i < 10000; i++){
 const stargeomtry = new THREE.BufferGeometry();
 stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 1.5});
+const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 2});
 const stars = new THREE.Points(stargeomtry, starmaterial);
+stars.castShadow = true;
+stars.receiveShadow = true;
 
 scene.add(stars);
 
 renderer.render(scene, camera);
+
+window.addEventListener('mousemove', (e) => {
+    stars.position.x = Math.random()* 600 - 300;
+    stars.position.y = Math.random()* 600 - 300;
+    stars.position.z = Math.random()* 600 - 300;
+
+    renderer.render(scene, camera);
+})
