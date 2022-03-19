@@ -3,55 +3,54 @@ import './style.css';
 
 const scene = new THREE.Scene(); 
 
-const camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / -2, window.innerHeight / 2, 1, 1000);
-camera.rotation.z = 1;
-camera.rotation.x = Math.PI / 2;
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 500);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#bg'),
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
-document.body.appendChild(renderer.domElement);
-camera.position.setZ(30);
+camera.position.set(0, 0, 100);
+camera.lookAt(0,0,0);
 renderer.render(scene, camera);
 
-const lights = new THREE.DirectionalLight(0xffff32);
-lights.castShadow = true;
-lights.shadow.mapSize.width = 512;
-lights.shadow.mapSize.height = 512;
-lights.shadow.camera.near = 0.1;
-lights.shadow.camera.far = 1000;
+const material = new THREE.LineBasicMaterial({color:0x2214ff});
 
-scene.add(lights);
-
-const vertices = [];
-for(let i = 0; i < 20000; i++){
-    const x = THREE.MathUtils.randFloatSpread(2000);
-    const y = THREE.MathUtils.randFloatSpread(2000);
-    const z = THREE.MathUtils.randFloatSpread(2000);
-
-    vertices.push(x, y, z);
+const points = [];
+for(let i = 0; i < 1000; i++){
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight
+    ));
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight
+    ));
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight
+    ));
 }
-const stargeomtry = new THREE.BufferGeometry();
-stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 1.5});
-const stars = new THREE.Points(stargeomtry, starmaterial);
-stars.castShadow = true;
-stars.receiveShadow = true;
+const geomtry = new THREE.BufferGeometry().setFromPoints(points);
 
-scene.add(stars);
+const lines = new THREE.Line(geomtry, material);
 
-renderer.render(scene, camera);
+scene.add(lines);
 
-window.addEventListener('mousemove', (e) => {
-    stars.rotation.x += Math.random() * window.innerWidth - window.innerHeight;
-    stars.rotation.y += Math.random() * window.innerWidth - window.innerHeight;
-    stars.rotation.z += Math.random() * window.innerWidth - window.innerHeight;
+function animate(){
+    requestAnimationFrame(animate);
+
+    lines.rotation.x += 0.01;
+    lines.rotation.y += 0.01;
+    lines.rotation.z += 0.01;
 
     renderer.render(scene, camera);
-});
-
-const texture = new THREE.TextureLoader()
+}
+animate();

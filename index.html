@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap" rel="stylesheet"> 
@@ -10,8 +11,82 @@
   </head> 
   <body>
     <header>
-      
+      <nav class="navar1">
+        <ul class="ar1">
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">My Stackoverflow</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">My Stackoverflow</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">My Github</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">My Github</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">My Linkedin</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">My Linkedin</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </nav>
     </header>
+    <canvas id="bg">
+
+    </canvas>
+    <div class="container">
+      <div class="mods">
+        <h1>My</h1>
+      </div>
+      <div class="mods">
+        <h1>Web</h1>
+      </div>
+      <div class="mods">
+        <h1>Site</h1>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
+    <script>
+      var slideindex = 0;
+      slides();
+      function slides(){
+        var i;
+        var x = document.getElementsByClassName("mods");
+        for(i = 0; i < x.length; i++){
+          x[i].style.opacity = "1";
+        }
+        slideindex++;
+        if(slideindex > x.length) {slideindex = 1}
+        x[slideindex-1].style.opacity = "0";
+        setTimeout(slides, 1000);
+      }
+    </script>
   </body>
 </html>
