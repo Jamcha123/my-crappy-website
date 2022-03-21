@@ -46,6 +46,57 @@ stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 
 
 const starmaterial = new THREE.PointsMaterial({color:0xff3221, size: 3});
 const stars = new THREE.Points(stargeomtry, starmaterial);
+stars.castShadow = false;
+stars.receiveShadow = true;
 scene1.add(stars);
 
 renderer1.render(scene1, camera1);
+
+function tostars(){
+    requestAnimationFrame(tostars);
+
+    stars.rotation.x += 0.008;
+    stars.rotation.y += 0.006;
+    stars.rotation.z += 0.008;
+
+    renderer1.render(scene1, camera1);
+}
+tostars();
+const linematerial = new THREE.LineBasicMaterial({color: 0x0000ff});
+const points = [];
+for(let i = 0; i < 1000; i++){
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+    ));
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight
+    ));
+    points.push(new THREE.Vector3(
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight,
+        Math.random() * window.innerWidth - window.innerHeight
+    ));
+}
+const linegeomtry = new THREE.BufferGeometry();
+linegeomtry.setFromPoints(points);
+
+const lines = new THREE.Line(linegeomtry, linematerial);
+lines.castShadow = false;
+lines.receiveShadow = true;
+
+scene2.add(lines);
+
+function animate(){
+    requestAnimationFrame(animate);
+
+    lines.rotation.x += 0.006;
+    lines.rotation.y += 0.008;
+    lines.rotation.z += 0.006;
+
+    renderer2.render(scene2, camera2);
+}
+animate();
