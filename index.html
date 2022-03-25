@@ -4,32 +4,60 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap" rel="stylesheet"> 
     <title>Vite App</title>
-    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap" rel="stylesheet"> 
   </head>
   <body>
-    <canvas class="can" id="bg1">
-
-    </canvas>
-    <canvas class="can" id="bg2">
-
-    </canvas>
+    <header>
+      <nav class="navar1">
+        <ul class="ar1">
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">About me</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">About me</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">Main Content</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">Main Content</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flip">
+            <div class="innerflip">
+              <div class="front">
+                <div class="boxes">
+                  <li><a href="">Contact info</a></li>
+                </div>
+              </div>
+              <div class="back">
+                <div class="boxes">
+                  <li><a href="">Contact info</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <canvas id="bg"></canvas>
     <script type="module" src="/main.js"></script>
-    <script>
-      var canvasindex = 0;
-      slides();
-      function slides(){
-        var i;
-        var x = document.getElementsByClassName("can");
-        for(i = 0; i < x.length; i++){
-          x[i].style.display = "none";
-        }
-        canvasindex++;
-        if(canvasindex > x.length) {canvasindex = 1}
-        x[canvasindex-1].style.display = "block";
-        setTimeout(slides, 3000);
-      }
-    </script>
   </body>
 </html>
