@@ -52,41 +52,24 @@ animate();
 const vertices1 = [];
 for(let i = 0; i < 100; i++){
     vertices1.push(new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000
     ));
     vertices1.push(new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000
     ));
     vertices1.push(new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000
     ));
 }
-const curve = new THREE.QuadraticBezierCurve3(
-    new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
-    ),
-    new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
-    ),
-    new THREE.Vector3(
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight,
-        Math.random() * window.innerWidth - window.innerHeight
-    )
-);
-const points = curve.getPoints(50);
+
 const linegeomtry = new THREE.BufferGeometry();
-linegeomtry.setFromPoints(vertices1, points);
+linegeomtry.setFromPoints(vertices1);
 
 const linematerial = new THREE.LineBasicMaterial({color: 0xff3213});
 const lines = new THREE.Line(linegeomtry, linematerial);
