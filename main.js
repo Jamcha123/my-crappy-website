@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import './style.css';
 import oc from 'three-orbit-controls';
+import { Points } from 'three';
 
 const orbit = oc(THREE);
 
@@ -17,50 +18,41 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.physicallyCorrectLights = true;
-renderer.outputEncoding = THREE.sRGBEncoding; 
+renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.render(scene, camera);
 
 const controls = new orbit(camera, renderer.domElement);
 
-function init(){
-    let y = 20000;
-    const vertices = [];
-    for(let i = 0; i < y; i++){
-        const x = THREE.MathUtils.randFloatSpread(2000);
-        const y = THREE.MathUtils.randFloatSpread(2000);
-        const z = THREE.MathUtils.randFloatSpread(2000);
-        
-        vertices.push(x, y, z);
+const vertices = [];
+for(let i = 0; i < 20000; i++){
+    const x = THREE.MathUtils.randFloatSpread(2000);
+    const y = THREE.MathUtils.randFloatSpread(2000);
+    const z = THREE.MathUtils.randFloatSpread(2000);
+
+    vertices.push(x, y, z);
     }
-    const stargeomtry = new THREE.BufferGeometry();
-    stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    
-    const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 1.5});
-    const stars = new THREE.Points(stargeomtry, starmaterial);  
-    scene.add(stars);
+const stargeomtry = new THREE.BufferGeometry();
+stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-    var starvelocity = 0;
-    var staracceraltion = 0.5;
-    
-    var num = 0;
+const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 1.5});
+const stars = new THREE.Points(stargeomtry, starmaterial);
+var starvelocity = 0;
+var staraccerlation = 0.5;
 
-    const lights = new THREE.AmbientLight(0xaaaaaa);
-    scene.add(lights);
+var num = 0;
+scene.add(stars);
 
-    function animate(){
-        requestAnimationFrame(animate);
-        num++;
-    
-        starvelocity += staracceraltion;
-        stars.position.z = starvelocity;
-    
-        if(num >= 500){
-            num = 0;
-            starvelocity = 0;
-        }
-    
-        renderer.render(scene, camera);
+function animate(){
+    requestAnimationFrame(animate);
+    num++;
+
+    starvelocity += staraccerlation;
+    stars.position.z = starvelocity;
+
+    if(num >= 500){
+        starvelocity = 0;
+        num = 0;
     }
-    animate();
+    renderer.render(scene, camera);
 }
-init();
+animate();
