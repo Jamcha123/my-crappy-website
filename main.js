@@ -24,7 +24,7 @@ renderer.render(scene, camera);
 const controls = new orbit(camera, renderer.domElement);
 
 const vertices = [];
-for(let i = 0; i < 20000; i++){
+for(let i = 0; i < 30000; i++){
     const x = THREE.MathUtils.randFloatSpread(2000);
     const y = THREE.MathUtils.randFloatSpread(2000);
     const z = THREE.MathUtils.randFloatSpread(2000);
@@ -37,7 +37,7 @@ stargeomtry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 
 const starmaterial = new THREE.PointsMaterial({color: 0xaaaaaa, size: 1.5});
 const stars = new THREE.Points(stargeomtry, starmaterial);
 var starvelocity = 0;
-var staraccerlation = 0.5;
+var staraccerlation = 0.7;
 
 var num = 0;
 scene.add(stars);

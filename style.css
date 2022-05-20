@@ -12,3 +12,60 @@ canvas{
   left: 0;
   right: 0;
 }
+.container{
+  width: 100%;
+  height: fit-content;
+  margin: auto;
+  padding: 0;
+  position: relative;
+  z-index: 100;
+}
+.navbar{
+  width: 100%;
+  height: fit-content;
+  margin: auto;
+  padding: 0;
+  position: relative;
+}
+.navbar .bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style-type: none;
+}
+.flip{
+  width: 125px;
+  height: 100px;
+  perspective: 1000px;
+  background-color: transparent
+}
+.innerflip{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 2s;
+}
+.flip:hover .innerflip{
+  transform: rotateY(180deg);
+}
+.front, .back{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+@keyframes value1 {
+  0%{background-image: linear-gradient(90deg, red, green, purple);}
+  50%{background-image: linear-gradient(90deg, );}
+}
+.front{
+  background-color: rgb(0, 247, 255);
+}
+.back{
+  background-color: aqua;
+  transform: rotateY(180deg);
+}
