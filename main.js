@@ -41,7 +41,9 @@ var staraccerlation = 0.7;
 
 var num = 0;
 scene.add(stars);
-
+function init(){
+    const spheregeomtry = new THREE.SphereGeometry(10, 10, 10);
+} 
 function animate(){
     requestAnimationFrame(animate);
     num++;
